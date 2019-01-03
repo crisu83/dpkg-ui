@@ -9,8 +9,6 @@ import {
 
 type ParseFn = (value: string) => any;
 
-export const defaultParseFn: ParseFn = value => value;
-
 export const dependencyParser: ParseFn = value =>
   value
     .split(", ")
@@ -57,11 +55,11 @@ export default class Parser {
 
   private parseField = (source: string): IFieldNode => {
     const [fieldName, fieldValue] = source.split(": ");
-    const parseFn = fieldValueParsers[fieldName] || defaultParseFn;
+    const parseFn = fieldValueParsers[fieldName];
     return {
       kind: NodeKind.Field,
       name: fieldName,
-      value: parseFn(fieldValue)
+      value: parseFn ? parseFn(fieldValue) : fieldValue
     };
   };
 

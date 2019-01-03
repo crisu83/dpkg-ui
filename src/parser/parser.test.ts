@@ -1,4 +1,4 @@
-import Parser, { defaultParseFn, dependencyParser } from "./parser";
+import Parser, { dependencyParser } from "./parser";
 
 const source = `
 Package: python-pkg-resources
@@ -83,10 +83,6 @@ it("parses source without errors", () => {
   - detection of host name spoofing or host address spoofing;
   - booby traps to implement an early-warning system.`
   );
-});
-
-it("text field is parsed without errors", () => {
-  expect(defaultParseFn("tcpd")).toBe("tcpd");
 });
 
 it("depends field is parsed without errors", () => {
