@@ -1,39 +1,29 @@
-import React, { PureComponent } from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableRow,
-  Typography
-} from "@material-ui/core";
+import React from "react";
+import { withRouter, Link } from "react-router-dom";
+import { ArrowBackIos } from "@material-ui/icons";
+import { PackageConsumer } from "./PackageContext";
+import PackageDetails from "./PackageDetails";
+import { findPackage } from "../utils";
 import { Package } from "../types";
 import css from "./packagePage.module.css";
 
 type PackagePageProps = {
-  packages: Package[];
+  match: any;
 };
 
-export default class PackagePage extends PureComponent<PackagePageProps> {
-  render() {
-    const { packages } = this.props;
+const PackagePage = ({ match }: PackagePageProps) => (
+  <div className={css.component}>
+    <div>
+      <Link to="/" className={css.backLink}>
+        <ArrowBackIos fontSize="large" />
+      </Link>
+    </div>
+    <PackageConsumer>
+      {(packages: Package[]) => (
+        <PackageDetails pkg={findPackage(match.params.packageName, packages)} />
+      )}
+    </PackageConsumer>
+  </div>
+);
 
-    return (
-      <div className={css.component}>
-        <Typography gutterBottom={true} variant="h2">
-          Packages
-        </Typography>
-        <Table className={css.table}>
-          <TableBody>
-            {packages.map((pkg, i) => (
-              <TableRow key={i}>
-                <TableCell>
-                  <span className={css.cellText}>{pkg.name}</span>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
-    );
-  }
-}
+export default withRouter(PackagePage);

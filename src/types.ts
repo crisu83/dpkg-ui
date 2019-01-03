@@ -1,5 +1,6 @@
 export type Package = {
   name: string;
   description: string;
-  depends: string[];
+  dependencies: string[];
+  dependents: string[];
 };
