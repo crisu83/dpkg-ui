@@ -1,5 +1,5 @@
-export interface Package {
+export type Package = {
   name: string;
   description: string;
   depends: string[];
-}
+};
