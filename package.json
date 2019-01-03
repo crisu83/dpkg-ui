@@ -19,6 +19,7 @@
     "typescript": "^3.2.2"
   },
   "scripts": {
+    "ci": "yarn lint && yarn test",
     "lint": "tslint ./src/**/*.{ts,tsx}",
     "start": "PORT=8080 react-scripts start",
     "build": "react-scripts build",

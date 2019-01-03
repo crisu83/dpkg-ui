@@ -6,7 +6,6 @@ node_js:
   - stable
 
 script:
-  - yarn lint
-  - yarn test
+  - yarn ci
 
 cache: yarn
