@@ -9,9 +9,9 @@ import {
 
 type ParseFn = (value: string) => any;
 
-const defaultParseFn: ParseFn = value => value;
+export const defaultParseFn: ParseFn = value => value;
 
-const dependencyParser: ParseFn = value =>
+export const dependencyParser: ParseFn = value =>
   value
     .split(", ")
     .map(dependency => dependency.split(" ")[0])
