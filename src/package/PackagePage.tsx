@@ -1,9 +1,11 @@
 import React, { PureComponent } from "react";
-import Typography from "@material-ui/core/Typography";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+  Typography
+} from "@material-ui/core";
 import { Package } from "../types";
 import css from "./packagePage.module.css";
 
@@ -17,7 +19,7 @@ export default class PackagePage extends PureComponent<PackagePageProps> {
 
     return (
       <div className={css.component}>
-        <Typography gutterBottom variant="h2">
+        <Typography gutterBottom={true} variant="h2">
           Packages
         </Typography>
         <Table className={css.table}>
