@@ -3,17 +3,16 @@ import { Link } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 import css from "./packageList.module.css";
 
-type PackageListProps = {
-  heading: string;
-  packageNames: string[];
+type DependentListProps = {
+  dependents: string[];
 };
 
-const PackageList = ({ heading, packageNames }: PackageListProps) => (
+const DependentList = ({ dependents }: DependentListProps) => (
   <div className={css.component}>
-    <Typography variant="h5">{heading}</Typography>
-    {packageNames.length ? (
+    <Typography variant="h5">Dependents</Typography>
+    {dependents.length ? (
       <ul className={css.list}>
-        {packageNames.map((packageName, i) => (
+        {dependents.map((packageName, i) => (
           <li className={css.packageName} key={i}>
             <Link to={`/${packageName}`}>{packageName}</Link>
           </li>
@@ -25,4 +24,4 @@ const PackageList = ({ heading, packageNames }: PackageListProps) => (
   </div>
 );
 
-export default PackageList;
+export default DependentList;

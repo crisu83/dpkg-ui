@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 import { Redirect } from "react-router-dom";
 import { Typography } from "@material-ui/core";
-import PackageList from "./PackageList";
+import DependencyList from "./DependencyList";
+import DependentList from "./DependentList";
 import { Package } from "../types";
 import css from "./packageDetails.module.css";
 
@@ -23,8 +24,8 @@ const PackageDetails = ({ pkg }: PackageDetailsProps) =>
           </Fragment>
         ))}
       </div>
-      <PackageList heading="Dependencies" packageNames={pkg.dependencies} />
-      <PackageList heading="Dependents" packageNames={pkg.dependents} />
+      <DependencyList dependencies={pkg.dependencies} />
+      <DependentList dependents={pkg.dependents} />
     </div>
   ) : (
     <Redirect to="/404" />

@@ -15,7 +15,7 @@ import css from "./homePage.module.css";
 const HomePage = () => (
   <div className={css.component}>
     <Typography gutterBottom variant="h2">
-      Packages
+      Debian Packages
     </Typography>
     <PackageConsumer>
       {(packages: Package[]) => (

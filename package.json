@@ -14,13 +14,18 @@
     "react-dom": "^16.7.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.2",
+    "typescript": "^3.2.2"
+  },
+  "devDependencies": {
+    "now": "^12.1.14",
     "tslint": "^5.12.0",
     "tslint-config-prettier": "^1.17.0",
-    "typescript": "^3.2.2"
+    "tslint-react": "^3.6.0"
   },
   "scripts": {
     "ci": "yarn lint && yarn test",
     "lint": "tslint ./src/**/*.{ts,tsx}",
+    "deploy": "yarn build && now deploy build",
     "start": "PORT=8080 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -31,8 +36,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ],
-  "devDependencies": {
-    "tslint-react": "^3.6.0"
-  }
+  ]
 }

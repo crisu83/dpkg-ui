@@ -1,4 +1,4 @@
-import { camelCase } from "../utils";
+import { camelCase, inArray } from "../utils";
 import {
   FieldName,
   IDocumentNode,
@@ -9,11 +9,27 @@ import {
 
 type ParseFn = (value: string) => any;
 
-export const dependencyParser: ParseFn = value =>
-  value
+type Dependency = {
+  name: string;
+  alternates: string[];
+};
+
+export const dependencyParser: ParseFn = value => {
+  return value
     .split(", ")
-    .map(dependency => dependency.split(" ")[0])
-    .filter((name, i, a) => a.indexOf(name) === i);
+    .reduce((dependencies: Dependency[], current: string): Dependency[] => {
+      const [name, ...alternates] = (current.split(" | ") || [current]).map(
+        part => part.split(" ")[0]
+      );
+
+      return !inArray(
+        dependencies,
+        (dependency: Dependency) => dependency.name === name
+      )
+        ? [...dependencies, { name, alternates }]
+        : dependencies;
+    }, []);
+};
 
 const fieldValueParsers: { [key: string]: ParseFn } = {
   Depends: dependencyParser
@@ -22,11 +38,7 @@ const fieldValueParsers: { [key: string]: ParseFn } = {
 export default class Parser {
   public parse = (source: string): IDocumentNode => {
     const packages = source.split("\n\n").map(this.parsePackage);
-    packages.sort((a, b) => {
-      return a.package && b.package
-        ? a.package.value.localeCompare(b.package.value)
-        : 0;
-    });
+    packages.sort((a, b) => a.package.value.localeCompare(b.package.value));
     return {
       kind: NodeKind.Document,
       packages

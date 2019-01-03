@@ -1,10 +1,9 @@
 import React from "react";
-import { withRouter, Link } from "react-router-dom";
-import { ArrowBackIos } from "@material-ui/icons";
+import { withRouter } from "react-router-dom";
 import PageWithBack from "../page/PageWithBack";
 import { PackageConsumer } from "./PackageContext";
 import PackageDetails from "./PackageDetails";
-import { findPackage } from "../utils";
+import { arrayFind } from "../utils";
 import { Package } from "../types";
 
 type PackagePageProps = {
@@ -15,7 +14,12 @@ const PackagePage = ({ match }: PackagePageProps) => (
   <PageWithBack>
     <PackageConsumer>
       {(packages: Package[]) => (
-        <PackageDetails pkg={findPackage(match.params.packageName, packages)} />
+        <PackageDetails
+          pkg={arrayFind(
+            packages,
+            (pkg: Package) => pkg.name === match.params.packageName
+          )}
+        />
       )}
     </PackageConsumer>
   </PageWithBack>
