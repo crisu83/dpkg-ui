@@ -27,7 +27,7 @@ Run the following command to run the development server:
 yarn start
 ```
 
-### Build
+## Build
 
 Run the following command to build this project:
 
@@ -35,12 +35,20 @@ Run the following command to build this project:
 yarn build
 ```
 
-### Continuous integration
+## Continuous integration
 
 Run the following command to run the CI pipeline:
 
 ```sh
 yarn ci
+```
+
+## Deployment
+
+Run the following command to deploy the app to [Now](https://now.sh):
+
+```sh
+yarn deploy
 ```
 
 ## License
