@@ -14,7 +14,7 @@ type AppProps = {
 const App = ({ packages }: AppProps) => (
   <div className={css.component}>
     <BrowserRouter>
-      <PackageProvider packages={packages}>
+      <PackageProvider value={packages}>
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/404" component={NotFoundPage} />

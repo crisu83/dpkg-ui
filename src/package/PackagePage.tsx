@@ -9,7 +9,7 @@ import { Package } from "../types";
 type PackagePageProps = {
   match: {
     params: {
-      packageName: string;
+      pkgName: string;
     };
   };
 } & RouteComponentProps;
@@ -21,7 +21,7 @@ const PackagePage = ({ match }: PackagePageProps) => (
         <PackageDetails
           pkg={arrayFind(
             packages,
-            (pkg: Package) => pkg.name === match.params.packageName
+            (pkg: Package) => pkg.name === match.params.pkgName
           )}
         />
       )}
