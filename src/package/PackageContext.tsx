@@ -5,7 +5,7 @@ const PackageContext = createContext([]);
 
 type PackageProviderProps = {
   packages: Package[];
-  children: any;
+  children?: any;
 };
 
 export const PackageProvider = ({

@@ -1,21 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { ArrowBackIos } from "@material-ui/icons";
 import css from "./pageWithBack.module.css";
 
 type PageProps = {
-  children: any;
+  history: any;
+  children?: any;
 };
 
-const PageWithBack = ({ children }: PageProps) => (
+const PageWithBack = ({ history, children }: PageProps) => (
   <div className={css.component}>
     <div className={css.leftArea}>
-      <Link to="/" className={css.backLink}>
+      <a onClick={() => history.goBack()} className={css.backLink}>
         <ArrowBackIos fontSize="large" />
-      </Link>
+      </a>
     </div>
     <div className={css.mainArea}>{children}</div>
   </div>
 );
 
-export default PageWithBack;
+export default withRouter(PageWithBack);

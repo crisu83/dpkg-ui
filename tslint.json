@@ -5,7 +5,7 @@
   "rules": {
     "interface-over-type-literal": false,
     "jsx-boolean-value": false,
-    "jsx-no-lamba": false,
+    "jsx-no-lambda": false,
     "member-access": false,
     "object-literal-sort-keys": false,
     "ordered-imports": false
