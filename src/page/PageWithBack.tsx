@@ -1,12 +1,11 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import { ArrowBackIos } from "@material-ui/icons";
 import css from "./pageWithBack.module.css";
 
 type PageProps = {
-  history: any;
   children?: any;
-};
+} & RouteComponentProps;
 
 const PageWithBack = ({ history, children }: PageProps) => (
   <div className={css.component}>
