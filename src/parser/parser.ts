@@ -4,27 +4,23 @@ import {
   IDocumentNode,
   IFieldNode,
   IPackageNode,
-  NodeKind
+  NodeKind,
+  IDependency
 } from "./ast";
 
 type ParseFn = (value: string) => any;
 
-type Dependency = {
-  name: string;
-  alternates: string[];
-};
-
 export const dependencyParser: ParseFn = value => {
   return value
     .split(", ")
-    .reduce((dependencies: Dependency[], current: string): Dependency[] => {
+    .reduce((dependencies: IDependency[], current: string): IDependency[] => {
       const [name, ...alternates] = (current.split(" | ") || [current]).map(
         part => part.split(" ")[0]
       );
 
       return !inArray(
         dependencies,
-        (dependency: Dependency) => dependency.name === name
+        (dependency: IDependency) => dependency.name === name
       )
         ? [...dependencies, { name, alternates }]
         : dependencies;
@@ -49,7 +45,7 @@ export default class Parser {
     const pattern = /^[\w\-]+: (?:.|\n\s)+$/gm;
     const fieldData = (source.match(pattern) || []).map(this.parseField);
     const fieldReducer = (
-      data: { [key: string]: IFieldNode },
+      data: { [key: string]: IFieldNode<any> },
       fieldName: string
     ) => {
       // @ts-ignore
@@ -65,7 +61,7 @@ export default class Parser {
     };
   };
 
-  private parseField = (source: string): IFieldNode => {
+  private parseField = (source: string): IFieldNode<any> => {
     const [fieldName, fieldValue] = source.split(": ");
     const parseFn = fieldValueParsers[fieldName];
     return {
@@ -75,7 +71,10 @@ export default class Parser {
     };
   };
 
-  private findField = (fieldName: FieldName, fields: IFieldNode[]) => {
+  private findField = (
+    fieldName: FieldName,
+    fields: Array<IFieldNode<any>>
+  ) => {
     return (fields.filter(field => field.name === fieldName) || [])[0];
   };
 }

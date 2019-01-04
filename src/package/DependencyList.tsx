@@ -16,7 +16,7 @@ const DependencyList = ({ dependencies }: DependencyListProps) => (
         {dependencies.map(({ name, alternates }, i) => (
           <li className={css.packageName} key={i}>
             <Link to={`/${name}`}>{name}</Link>
-            {alternates.length ? " | " + alternates.join(" | ") : ""}
+            {alternates.length > 0 && " | " + alternates.join(" | ")}
           </li>
         ))}
       </ul>

@@ -1,5 +1,5 @@
 import { IPackageNode } from "./parser/ast";
-import { Package } from "./types";
+import { Package, Dependency } from "./types";
 import Parser from "./parser/parser";
 
 export const camelCase = (value: string): string =>
