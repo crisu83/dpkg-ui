@@ -8,44 +8,43 @@ import {
   Typography,
   TableHead
 } from "@material-ui/core";
-import withPackages from "../hoc/withPackages";
-import { Package } from "../types";
+import usePackages from "../hooks/usePackages";
 import css from "./homePage.module.css";
 
-interface IHomePageProps {
-  packages: Package[];
-}
+const HomePage = () => {
+  const { packages } = usePackages();
 
-const HomePage = ({ packages }: IHomePageProps) => (
-  <div className={css.component}>
-    <Typography gutterBottom variant="h2">
-      Debian Packages
-    </Typography>
-    <Table className={css.table}>
-      <TableHead>
-        <TableRow>
-          <TableCell>Name</TableCell>
-          <TableCell align="center"># Dependencies</TableCell>
-          <TableCell align="center"># Dependents</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {packages.map((pkg, i) => (
-          <TableRow className={css.tableRow} key={i}>
-            <TableCell>
-              <Link to={`/${pkg.name}`}>{pkg.name}</Link>
-            </TableCell>
-            <TableCell align="center" className={css.numericCell}>
-              {pkg.dependencies.length}
-            </TableCell>
-            <TableCell align="center" className={css.numericCell}>
-              {pkg.dependents.length}
-            </TableCell>
+  return (
+    <main>
+      <Typography gutterBottom variant="h2">
+        Debian Packages
+      </Typography>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Name</TableCell>
+            <TableCell align="center"># Dependencies</TableCell>
+            <TableCell align="center"># Dependents</TableCell>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  </div>
-);
+        </TableHead>
+        <TableBody>
+          {packages.map(pkg => (
+            <TableRow className={css.tableRow} key={pkg.name}>
+              <TableCell>
+                <Link to={`/${pkg.name}`}>{pkg.name}</Link>
+              </TableCell>
+              <TableCell align="center" className={css.numericCell}>
+                {pkg.dependencies.length}
+              </TableCell>
+              <TableCell align="center" className={css.numericCell}>
+                {pkg.dependents.length}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </main>
+  );
+};
 
-export default withPackages(HomePage);
+export default HomePage;
