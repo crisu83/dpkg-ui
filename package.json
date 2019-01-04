@@ -25,11 +25,12 @@
   "scripts": {
     "ci": "yarn lint && yarn test",
     "lint": "tslint ./src/**/*.{ts,tsx}",
-    "deploy": "yarn build && now deploy build",
+    "deploy": "now",
     "start": "PORT=8080 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "now-build": "yarn build && mv build dist"
   },
   "browserslist": [
     ">0.2%",
