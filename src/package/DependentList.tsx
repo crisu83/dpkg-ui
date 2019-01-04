@@ -12,9 +12,9 @@ const DependentList = ({ dependents }: DependentListProps) => (
     <Typography variant="h5">Dependents</Typography>
     {dependents.length ? (
       <ul className={css.list}>
-        {dependents.map((packageName, i) => (
+        {dependents.map((name, i) => (
           <li className={css.packageName} key={i}>
-            <Link to={`/${packageName}`}>{packageName}</Link>
+            <Link to={`/${name}`}>{name}</Link>
           </li>
         ))}
       </ul>

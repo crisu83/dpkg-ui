@@ -19,10 +19,7 @@ export const dependencyParser: ParseFn<IDependency[]> = value => {
       part => part.split(" ")[0]
     );
 
-    return !inArray(
-      dependencies,
-      (dependency: IDependency) => dependency.name === name
-    )
+    return !inArray(dependencies, dependency => dependency.name === name)
       ? [...dependencies, { name, alternates }]
       : dependencies;
   };

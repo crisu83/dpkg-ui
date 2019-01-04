@@ -17,12 +17,9 @@ type PackagePageProps = {
 const PackagePage = ({ match }: PackagePageProps) => (
   <PageWithBack>
     <PackageConsumer>
-      {(packages: Package[]) => (
+      {packages => (
         <PackageDetails
-          pkg={arrayFind(
-            packages,
-            (pkg: Package) => pkg.name === match.params.pkgName
-          )}
+          pkg={arrayFind(packages, pkg => pkg.name === match.params.pkgName)}
         />
       )}
     </PackageConsumer>

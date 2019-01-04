@@ -18,7 +18,7 @@ const HomePage = () => (
       Debian Packages
     </Typography>
     <PackageConsumer>
-      {(packages: Package[]) => (
+      {packages => (
         <Table className={css.table}>
           <TableHead>
             <TableRow>
@@ -34,10 +34,10 @@ const HomePage = () => (
                   <Link to={`/${pkg.name}`}>{pkg.name}</Link>
                 </TableCell>
                 <TableCell align="center" className={css.numericCell}>
-                  {String(pkg.dependencies.length)}
+                  {pkg.dependencies.length}
                 </TableCell>
                 <TableCell align="center" className={css.numericCell}>
-                  {String(pkg.dependents.length)}
+                  {pkg.dependents.length}
                 </TableCell>
               </TableRow>
             ))}

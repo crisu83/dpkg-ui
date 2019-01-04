@@ -5,15 +5,16 @@ import Parser from "./parser/parser";
 export const camelCase = (value: string): string =>
   value[0].toLowerCase() + value.substr(1);
 
-export const arrayFind = (
-  array: any[],
-  comparatorFn: (obj: any) => boolean
-): any => (array.filter(comparatorFn) || [])[0];
+export function arrayFind<T>(array: T[], comparatorFn: (obj: T) => boolean): T {
+  return (array.filter(comparatorFn) || [])[0];
+}
 
-export const inArray = (
-  array: any[],
-  comparatorFn: (obj: any) => boolean
-): boolean => array.filter(comparatorFn).length > 0;
+export function inArray<T>(
+  array: T[],
+  comparatorFn: (obj: T) => boolean
+): boolean {
+  return array.filter(comparatorFn).length > 0;
+}
 
 export const loadPackages = async (): Promise<Package[]> => {
   const statusFile = require("./resources/status.real");

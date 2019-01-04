@@ -17,7 +17,7 @@ const PackageDetails = ({ pkg }: PackageDetailsProps) =>
         {pkg.name}
       </Typography>
       <div className={css.descriptionText}>
-        {pkg.description.split("\n").map((line: string, i: number) => (
+        {pkg.description.split("\n").map((line, i) => (
           <Fragment key={i}>
             {line}
             <br />
