@@ -12,7 +12,7 @@ type PackageDetailsProps = {
 
 const PackageDetails = ({ pkg }: PackageDetailsProps) =>
   pkg ? (
-    <div>
+    <div className={css.component}>
       <Typography gutterBottom variant="h2">
         {pkg.name}
       </Typography>

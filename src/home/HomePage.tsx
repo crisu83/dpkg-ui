@@ -8,7 +8,6 @@ import {
   Typography,
   TableHead
 } from "@material-ui/core";
-import { Package } from "../types";
 import { PackageConsumer } from "../package/PackageContext";
 import css from "./homePage.module.css";
 

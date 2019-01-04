@@ -5,8 +5,11 @@ import Parser from "./parser/parser";
 export const camelCase = (value: string): string =>
   value[0].toLowerCase() + value.substr(1);
 
-export function arrayFind<T>(array: T[], comparatorFn: (obj: T) => boolean): T {
-  return (array.filter(comparatorFn) || [])[0];
+export function arrayFind<T>(
+  array: T[],
+  comparatorFn: (obj: T) => boolean
+): T | null {
+  return array.filter(comparatorFn)[0];
 }
 
 export function inArray<T>(
