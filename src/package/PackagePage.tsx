@@ -5,16 +5,19 @@ import PackageDetails from "./PackageDetails";
 import withPackages from "../hoc/withPackages";
 import { Package } from "../types";
 
-type PackagePageProps = RouteComponentProps & {
+interface IPackagePageProps {
   match: {
     params: {
       pkgName: string;
     };
   };
   getPackage: (pkgName: string) => Package | null;
-};
+}
 
-const PackagePage = ({ match, getPackage }: PackagePageProps) => (
+const PackagePage = ({
+  match,
+  getPackage
+}: RouteComponentProps & IPackagePageProps) => (
   <PageWithBack>
     <PackageDetails
       pkg={getPackage(match.params.pkgName)}

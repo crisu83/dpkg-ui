@@ -12,11 +12,11 @@ import withPackages from "../hoc/withPackages";
 import { Package } from "../types";
 import css from "./homePage.module.css";
 
-type HomePageProps = {
+interface IHomePageProps {
   packages: Package[];
-};
+}
 
-const HomePage = ({ packages }: HomePageProps) => (
+const HomePage = ({ packages }: IHomePageProps) => (
   <div className={css.component}>
     <Typography gutterBottom variant="h2">
       Debian Packages

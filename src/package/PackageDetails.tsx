@@ -7,11 +7,11 @@ import { Package } from "../types";
 import css from "./packageDetails.module.css";
 import scrollToTop from "../hoc/scrollToTop";
 
-type PackageDetailsProps = {
+interface IPackageDetailsProps {
   pkg: Package | null;
-};
+}
 
-const PackageDetails = ({ pkg }: PackageDetailsProps) =>
+const PackageDetails = ({ pkg }: IPackageDetailsProps) =>
   pkg ? (
     <article>
       <Typography gutterBottom variant="h2">

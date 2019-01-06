@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 import css from "./packageList.module.css";
 
-type DependentListProps = {
+interface IDependentListProps {
   dependents: string[];
-};
+}
 
-const DependentList = ({ dependents }: DependentListProps) => (
+const DependentList = ({ dependents }: IDependentListProps) => (
   <div className={css.component}>
     <Typography variant="h5">Dependents</Typography>
     {dependents.length ? (
