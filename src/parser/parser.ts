@@ -1,4 +1,4 @@
-import { camelCase, inArray } from "../utils";
+import { arraySort, camelCase, inArray } from "../utils";
 import {
   FieldName,
   IDocumentNode,
@@ -19,7 +19,7 @@ export const dependencyParser: ParseFn<IDependency[]> = value => {
       part => part.split(" ")[0]
     );
 
-    return !inArray(dependencies, dependency => dependency.name === name)
+    return !inArray(dependencies, d => d.name === name)
       ? [...dependencies, { name, alternates }]
       : dependencies;
   };
@@ -33,31 +33,31 @@ const fieldValueParsers: { [fieldName: string]: ParseFn<any> } = {
 
 export default class Parser {
   public parse = (source: string): IDocumentNode => {
-    const packages = source.split("\n\n").map(this._parsePackage);
-
-    packages.sort((a, b) => a.package.value.localeCompare(b.package.value));
-
     return {
       kind: NodeKind.Document,
-      packages
+      packages: arraySort(
+        source.split("\n\n").map(this._parsePackage),
+        (a, b) => a.package.value.localeCompare(b.package.value)
+      )
     };
   };
 
   private _parsePackage = (source: string): IPackageNode => {
     const pattern = /^[\w\-]+: (?:.|\n\s)+$/gm;
-    const fieldData = (source.match(pattern) || []).map(this._parseField);
-    const fieldReducer = (
-      data: { [fieldName: string]: IFieldNode<any> },
-      fieldName: FieldName
-    ) => {
-      const field = this._findField(FieldName[fieldName], fieldData);
-
-      return field ? { [camelCase(fieldName)]: field, ...data } : data;
-    };
+    const fields = (source.match(pattern) || []).map(this._parseField);
 
     return {
       kind: NodeKind.Package,
-      ...Object.values(FieldName).reduce(fieldReducer, {})
+      ...Object.values(FieldName).reduce(
+        (
+          data: { [fieldName: string]: IFieldNode<any> },
+          fieldName: FieldName
+        ) => {
+          const field = fields.filter(f => f.name === FieldName[fieldName])[0];
+          return field ? { [camelCase(fieldName)]: field, ...data } : data;
+        },
+        {}
+      )
     };
   };
 
@@ -71,7 +71,4 @@ export default class Parser {
       value: parseFn ? parseFn(fieldValue) : fieldValue
     };
   };
-
-  private _findField = (fieldName: FieldName, fields: Array<IFieldNode<any>>) =>
-    (fields.filter(field => field.name === fieldName) || [])[0];
 }
