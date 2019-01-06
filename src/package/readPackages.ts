@@ -18,7 +18,7 @@ const readPackages = async (statusFile: string): Promise<Package[]> => {
   return ast.packages.map(nodeToPackage).map((pkg, _, packages) => ({
     ...pkg,
     dependents: packages
-      .filter(p => inArray(p.dependencies, d => d.name === p.name))
+      .filter(p => inArray(p.dependencies, d => d.name === pkg.name))
       .map(dependent => dependent.name)
   }));
 };
