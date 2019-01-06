@@ -5,9 +5,7 @@ import PackagePage from "../package/PackagePage";
 import NotFoundPage from "../notFound/NotFoundPage";
 import css from "./App.module.css";
 
-type AppProps = {};
-
-const App = ({  }: AppProps) => (
+const App = () => (
   <div className={css.component}>
     <Switch>
       <Route exact path="/" component={HomePage} />

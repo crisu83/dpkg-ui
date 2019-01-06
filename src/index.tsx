@@ -2,16 +2,22 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { PackageProvider } from "./package/PackageContext";
-import { loadPackages } from "./utils";
+import readPackages from "./package/readPackages";
 import App from "./app/App";
 import * as serviceWorker from "./serviceWorker";
+import { arrayFind } from "./utils";
 import "./index.css";
 
+const statusFile = require("./resources/status.real");
+
 const renderApp = async (Component: any) => {
-  const packages = await loadPackages();
+  const packages = await readPackages(statusFile);
+
+  const getPackage = (pkgName: string) =>
+    arrayFind(packages, p => p.name === pkgName);
 
   ReactDOM.render(
-    <PackageProvider value={packages}>
+    <PackageProvider value={{ packages, getPackage }}>
       <BrowserRouter>
         <Component />
       </BrowserRouter>

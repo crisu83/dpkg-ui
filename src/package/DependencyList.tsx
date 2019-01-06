@@ -13,8 +13,8 @@ const DependencyList = ({ dependencies }: DependencyListProps) => (
     <Typography variant="h5">Dependencies</Typography>
     {dependencies.length ? (
       <ul className={css.list}>
-        {dependencies.map(({ name, alternates }, i) => (
-          <li className={css.packageName} key={i}>
+        {dependencies.map(({ name, alternates }) => (
+          <li className={css.packageName} key={name}>
             <Link to={`/${name}`}>{name}</Link>
             {alternates.length > 0 && " | " + alternates.join(" | ")}
           </li>

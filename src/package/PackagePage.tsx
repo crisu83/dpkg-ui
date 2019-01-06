@@ -3,23 +3,20 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import PageWithBack from "../page/PageWithBack";
 import { PackageConsumer } from "./PackageContext";
 import PackageDetails from "./PackageDetails";
-import { arrayFind } from "../utils";
 
-type PackagePageProps = {
+type PackagePageProps = RouteComponentProps & {
   match: {
     params: {
       pkgName: string;
     };
   };
-} & RouteComponentProps;
+};
 
 const PackagePage = ({ match }: PackagePageProps) => (
   <PageWithBack>
     <PackageConsumer>
-      {packages => (
-        <PackageDetails
-          pkg={arrayFind(packages, pkg => pkg.name === match.params.pkgName)}
-        />
+      {({ getPackage }) => (
+        <PackageDetails pkg={getPackage(match.params.pkgName)} />
       )}
     </PackageConsumer>
   </PageWithBack>

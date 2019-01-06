@@ -17,7 +17,7 @@ const HomePage = () => (
       Debian Packages
     </Typography>
     <PackageConsumer>
-      {packages => (
+      {({ packages }) => (
         <Table className={css.table}>
           <TableHead>
             <TableRow>

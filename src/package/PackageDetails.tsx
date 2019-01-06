@@ -12,7 +12,7 @@ type PackageDetailsProps = {
 
 const PackageDetails = ({ pkg }: PackageDetailsProps) =>
   pkg ? (
-    <div className={css.component}>
+    <article>
       <Typography gutterBottom variant="h2">
         {pkg.name}
       </Typography>
@@ -26,7 +26,7 @@ const PackageDetails = ({ pkg }: PackageDetailsProps) =>
       </div>
       <DependencyList dependencies={pkg.dependencies} />
       <DependentList dependents={pkg.dependents} />
-    </div>
+    </article>
   ) : (
     <Redirect to="/404" />
   );

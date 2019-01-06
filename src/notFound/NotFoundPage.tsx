@@ -3,9 +3,7 @@ import { Typography } from "@material-ui/core";
 import PageWithBack from "../page/PageWithBack";
 import css from "./notFoundPage.module.css";
 
-type NotFoundPageProps = {};
-
-const NotFoundPage = ({  }: NotFoundPageProps) => (
+const NotFoundPage = () => (
   <PageWithBack>
     <Typography gutterBottom variant="h2">
       404

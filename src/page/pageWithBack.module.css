@@ -3,13 +3,8 @@
   grid-template-columns: [gutter] 60px [main] auto;
 }
 
-.leftArea {
-}
-
-.mainArea {
-}
-
 .backLink {
-  display: block;
+  display: inline-block;
   margin-top: 16px;
+  cursor: pointer;
 }
