@@ -5,7 +5,6 @@ import { PackageProvider } from "./package/PackageContext";
 import readPackages from "./package/readPackages";
 import App from "./app/App";
 import * as serviceWorker from "./serviceWorker";
-import { arrayFind } from "./utils";
 import "./index.css";
 
 const statusFile = require("./resources/status.real");
@@ -13,11 +12,8 @@ const statusFile = require("./resources/status.real");
 const renderApp = async (Component: any) => {
   const packages = await readPackages(statusFile);
 
-  const getPackage = (pkgName: string) =>
-    arrayFind(packages, p => p.name === pkgName);
-
   ReactDOM.render(
-    <PackageProvider value={{ packages, getPackage }}>
+    <PackageProvider value={packages}>
       <BrowserRouter>
         <Component />
       </BrowserRouter>
