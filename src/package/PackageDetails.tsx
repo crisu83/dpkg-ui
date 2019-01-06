@@ -5,6 +5,7 @@ import DependencyList from "./DependencyList";
 import DependentList from "./DependentList";
 import { Package } from "../types";
 import css from "./packageDetails.module.css";
+import scrollToTop from "../hoc/scrollToTop";
 
 type PackageDetailsProps = {
   pkg: Package | null;
@@ -31,4 +32,4 @@ const PackageDetails = ({ pkg }: PackageDetailsProps) =>
     <Redirect to="/404" />
   );
 
-export default PackageDetails;
+export default scrollToTop(PackageDetails);

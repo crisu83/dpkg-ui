@@ -16,7 +16,10 @@ const PackagePage = ({ match }: PackagePageProps) => (
   <PageWithBack>
     <PackageConsumer>
       {({ getPackage }) => (
-        <PackageDetails pkg={getPackage(match.params.pkgName)} />
+        <PackageDetails
+          pkg={getPackage(match.params.pkgName)}
+          key={match.params.pkgName}
+        />
       )}
     </PackageConsumer>
   </PageWithBack>
