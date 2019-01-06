@@ -11,20 +11,17 @@ import {
 type ParseFn<ParsedValue> = (value: string) => ParsedValue;
 
 export const dependencyParser: ParseFn<IDependency[]> = value => {
-  const dependencyReducer = (
-    dependencies: IDependency[],
-    current: string
-  ): IDependency[] => {
-    const [name, ...alternates] = (current.split(" | ") || [current]).map(
-      part => part.split(" ")[0]
-    );
+  return value
+    .split(", ")
+    .reduce((dependencies: IDependency[], current: string): IDependency[] => {
+      const [name, ...alternates] = current
+        .split(" | ")
+        .map(v => v.split(" ")[0]);
 
-    return !inArray(dependencies, d => d.name === name)
-      ? [...dependencies, { name, alternates }]
-      : dependencies;
-  };
-
-  return value.split(", ").reduce(dependencyReducer, []);
+      return !inArray(dependencies, d => d.name === name)
+        ? [...dependencies, { name, alternates }]
+        : dependencies;
+    }, []);
 };
 
 const fieldValueParsers: { [fieldName: string]: ParseFn<any> } = {
@@ -54,6 +51,7 @@ export default class Parser {
           fieldName: FieldName
         ) => {
           const field = fields.filter(f => f.name === FieldName[fieldName])[0];
+
           return field ? { [camelCase(fieldName)]: field, ...data } : data;
         },
         {}
