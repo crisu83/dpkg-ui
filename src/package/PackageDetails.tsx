@@ -5,31 +5,38 @@ import DependencyList from "./DependencyList";
 import DependentList from "./DependentList";
 import { Package } from "../types";
 import css from "./packageDetails.module.css";
-import scrollToTop from "../hoc/scrollToTop";
+import useScrollToTop from "../hooks/useScrollToTop";
 
 interface IPackageDetailsProps {
   pkg: Package | null;
 }
 
-const PackageDetails = ({ pkg }: IPackageDetailsProps) =>
-  pkg ? (
+const PackageDetails = ({ pkg }: IPackageDetailsProps) => {
+  if (!pkg) {
+    return <Redirect to="/404" />;
+  }
+
+  const { name, description, dependencies, dependents } = pkg;
+
+  useScrollToTop([name]);
+
+  return (
     <article>
       <Typography gutterBottom variant="h2">
-        {pkg.name}
+        {name}
       </Typography>
       <div className={css.descriptionText}>
-        {pkg.description.split("\n").map((line, i) => (
+        {description.split("\n").map((line, i) => (
           <Fragment key={i}>
             {line}
             <br />
           </Fragment>
         ))}
       </div>
-      <DependencyList dependencies={pkg.dependencies} />
-      <DependentList dependents={pkg.dependents} />
+      <DependencyList dependencies={dependencies} />
+      <DependentList dependents={dependents} />
     </article>
-  ) : (
-    <Redirect to="/404" />
   );
+};
 
-export default scrollToTop(PackageDetails);
+export default PackageDetails;
